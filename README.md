@@ -1,8 +1,8 @@
 # snake
 
-![Home](https://i.ibb.co/6shts2n/gallery.png)
+![Snake](https://i.ibb.co/6shts2n/gallery.png)
 
-Классическая змейка.
+Классическая змейка. Игра доступна по **[ссылке](https://dazzling-shockley-bb41ed.netlify.app/)**
 
 Особенности:
 
