@@ -1,4 +1,5 @@
 # snake
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0520eaca-39f4-4344-975d-3d454b7782e2/deploy-status)](https://app.netlify.com/sites/dazzling-shockley-bb41ed/deploys)
 
 ![Snake](https://i.ibb.co/6shts2n/gallery.png)
 
