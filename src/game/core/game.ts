@@ -156,6 +156,8 @@ export class Game implements IGame {
     this.scores = 0;
     this.speed = speed;
     this.prizesCounter = 0;
+
+    this.renderer.clear();
   }
 
   private animate = () => {
