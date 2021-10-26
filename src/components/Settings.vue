@@ -4,13 +4,13 @@
       <base-button
         v-if="isPaused && isPlaying"
         @click="$emit('resumed')"
-        class="settings__button"
+        class="settings__button pause"
         >resume</base-button
       >
       <base-button
         @click="$emit('started', speed, level)"
         class="settings__button"
-        >start</base-button
+        >{{ startButtonTitle }}</base-button
       >
       <router-link to="/editor" custom v-slot="{ navigate, href }">
         <base-button
@@ -40,28 +40,38 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import BaseButton from "@/components/BaseButton.vue";
 
 export default defineComponent({
   name: "Settings",
   components: { BaseButton },
   props: {
-    isPlaying: Boolean,
-    isPaused: Boolean,
+    isPlaying: {
+      type: Boolean,
+      default: false,
+    },
+    isPaused: {
+      type: Boolean,
+      default: false,
+    },
     levels: {
       type: Number,
       required: true,
     },
   },
   emits: ["started", "resumed"],
-  setup() {
+  setup(props) {
     let speed = ref(20);
     let level = ref(-1);
+    const startButtonTitle = computed(() =>
+      props.isPaused ? "restart" : "start"
+    );
 
     return {
       speed,
       level,
+      startButtonTitle,
     };
   },
 });

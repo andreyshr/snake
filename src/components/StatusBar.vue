@@ -1,6 +1,6 @@
 <template>
   <div class="status-bar">
-    <div>
+    <div class="status-bar__scores">
       <span>scores: </span>
       <span>{{ scores }}</span>
     </div>
@@ -23,9 +23,18 @@ export default defineComponent({
   name: "StatusBar",
   components: { BaseIcon, BaseButton },
   props: {
-    isPlaying: Boolean,
-    isPaused: Boolean,
-    scores: Number,
+    isPlaying: {
+      type: Boolean,
+      default: false,
+    },
+    isPaused: {
+      type: Boolean,
+      default: false,
+    },
+    scores: {
+      type: Number,
+      default: 0,
+    },
   },
   emits: ["paused"],
 });
