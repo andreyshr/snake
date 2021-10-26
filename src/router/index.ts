@@ -7,6 +7,16 @@ const routes: Array<RouteRecordRaw> = [
     name: "Home",
     component: Home,
   },
+  {
+    path: "/game",
+    name: "GamePage",
+    component: () => import("../views/GamePage.vue"),
+  },
+  {
+    path: "/editor",
+    name: "EditorPage",
+    component: () => import("../views/EditorPage.vue"),
+  },
 ];
 
 const router = createRouter({
