@@ -1,5 +1,15 @@
 # snake
 
+Классическая змейка.
+
+Особенности:
+
+- выбор скорости игры
+- выбор предустановленного уровня
+- создание своего уровня в редакторе
+
+![Home](https://api.monosnap.com/file/download?id=vqpfXXvdGEUX7jq1i5Jzv9alvizWWk)
+
 ## Project setup
 ```
 npm install
