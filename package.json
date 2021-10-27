@@ -39,6 +39,7 @@
     "vue-svg-loader": "^0.17.0-beta.2"
   },
   "gitHooks": {
-    "pre-commit": "npm run lint"
+    "pre-commit": "npm run lint",
+    "pre-push": "npm run test:unit"
   }
 }
