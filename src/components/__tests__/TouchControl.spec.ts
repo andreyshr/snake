@@ -13,24 +13,18 @@ describe("TouchControl", () => {
   it("should properly render button down", () => {
     const wrapper = mount(TouchControl);
 
-    const buttonDown = wrapper.find("button#ArrowDown");
-
-    expect(buttonDown.exists()).toBe(true);
+    expect(wrapper.find("button#ArrowDown").exists()).toBe(true);
   });
 
   it("should properly render button left", () => {
     const wrapper = mount(TouchControl);
 
-    const buttonLeft = wrapper.find("button#ArrowLeft");
-
-    expect(buttonLeft.exists()).toBe(true);
+    expect(wrapper.find("button#ArrowLeft").exists()).toBe(true);
   });
 
   it("should properly render button right", () => {
     const wrapper = mount(TouchControl);
 
-    const buttonRight = wrapper.find("button#ArrowRight");
-
-    expect(buttonRight.exists()).toBe(true);
+    expect(wrapper.find("button#ArrowRight").exists()).toBe(true);
   });
 });
