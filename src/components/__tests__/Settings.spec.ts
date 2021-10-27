@@ -1,25 +1,26 @@
 import { mount, VueWrapper } from "@vue/test-utils";
+import { ComponentPublicInstance } from "vue";
 import router from "@/router";
 import Settings from "@/components/Settings.vue";
 
-let wrapper: VueWrapper<any>;
-
-beforeEach(async () => {
-  await router.push("/");
-  wrapper = mount(Settings, {
-    props: {
-      isPlaying: false,
-      isPaused: false,
-      levels: 0,
-    },
-    global: {
-      plugins: [router],
-    },
-  });
-});
-
 describe("Settings", () => {
-  it("shouldn't render resume button when game is not paused", async () => {
+  let wrapper: VueWrapper<ComponentPublicInstance>;
+
+  beforeEach(async () => {
+    await router.push("/");
+    wrapper = mount(Settings, {
+      props: {
+        isPlaying: false,
+        isPaused: false,
+        levels: 0,
+      },
+      global: {
+        plugins: [router],
+      },
+    });
+  });
+
+  it("shouldn't render resume button when game is not paused", () => {
     expect(wrapper.find(".resume").exists()).toBe(false);
   });
 

@@ -2,14 +2,14 @@
   <div class="settings">
     <div class="settings__wrapper">
       <base-button
-        v-if="isPaused && isPlaying"
+        v-if="isPaused"
         @click="$emit('resumed')"
-        class="settings__button pause"
+        class="settings__button resume"
         >resume</base-button
       >
       <base-button
         @click="$emit('started', speed, level)"
-        class="settings__button"
+        class="settings__button start"
         >{{ startButtonTitle }}</base-button
       >
       <router-link to="/editor" custom v-slot="{ navigate, href }">
