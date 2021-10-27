@@ -5,9 +5,7 @@ describe("BaseButton", () => {
   it("should properly render default button", () => {
     const wrapper = shallowMount(BaseButton);
 
-    const button = wrapper.get("button");
-
-    expect(button.text()).toBe("");
+    expect(wrapper.get("button").text()).toBe("");
   });
 
   it("should properly render default button with slot", () => {
@@ -17,9 +15,7 @@ describe("BaseButton", () => {
       },
     });
 
-    const button = wrapper.get("button");
-
-    expect(button.text()).toBe("my button");
+    expect(wrapper.get("button").text()).toBe("my button");
   });
 
   it("should properly render button with custom tag", () => {
@@ -33,8 +29,6 @@ describe("BaseButton", () => {
       },
     });
 
-    const button = wrapper.find("a[href='https://test.test']");
-
-    expect(button.exists()).toBe(true);
+    expect(wrapper.find("a[href='https://test.test']").exists()).toBe(true);
   });
 });
