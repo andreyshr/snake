@@ -15,9 +15,7 @@ describe("SocialItem", () => {
       },
     });
 
-    const link = wrapper.find("a[href='https://test.test']");
-
-    expect(link.exists()).toBe(true);
+    expect(wrapper.find("a[href='https://test.test']").exists()).toBe(true);
   });
 
   it("should render a title", () => {
@@ -27,8 +25,6 @@ describe("SocialItem", () => {
       },
     });
 
-    const link = wrapper.find("a[href='https://test.test']");
-
-    expect(link.text()).toBe("social");
+    expect(wrapper.find("a[href='https://test.test']").text()).toBe("social");
   });
 });
