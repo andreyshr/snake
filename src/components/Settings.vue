@@ -1,51 +1,58 @@
 <template>
   <div class="settings">
-    <div class="settings__wrapper">
-      <base-button
-        v-if="isPaused"
-        @click="$emit('resumed')"
-        class="settings__button resume"
-        >resume</base-button
-      >
-      <base-button
-        @click="$emit('started', speed, level)"
-        class="settings__button start"
-        >{{ startButtonTitle }}</base-button
-      >
-      <router-link to="/editor" custom v-slot="{ navigate, href }">
-        <base-button
-          @click="navigate"
-          @keypress.enter="navigate"
-          tag="a"
-          class="settings__button"
-          :href="href"
-          >editor</base-button
+    <ul class="settings__list">
+      <li v-if="isPaused" class="settings__item">
+        <base-button @click="$emit('resumed')" class="resume"
+          >resume</base-button
         >
-      </router-link>
-      <label>
-        game speed
-        <input v-model="speed" type="range" min="8" max="28" step="2" />
-      </label>
-      <label>
-        select level
-        <select v-model="level" class="settings__level-select">
-          <option value="-1">free play</option>
-          <option v-for="(level, i) in levels" :key="i" :value="i">
-            {{ level }}
-          </option>
-        </select>
-      </label>
-    </div>
+      </li>
+      <li class="settings__item">
+        <base-button @click="$emit('started', speed, level)" class="start">{{
+          startButtonTitle
+        }}</base-button>
+      </li>
+      <li class="settings__item">
+        <router-link to="/editor" custom v-slot="{ navigate, href }">
+          <base-button
+            @click="navigate"
+            @keypress.enter="navigate"
+            tag="a"
+            :href="href"
+            >editor</base-button
+          >
+        </router-link>
+      </li>
+      <li class="settings__item">
+        <base-input
+          v-model="speed"
+          label="game speed"
+          type="range"
+          min="8"
+          max="28"
+          step="2"
+        />
+      </li>
+      <li class="settings__item">
+        <base-select v-model="level" label="select level" :options="levels" />
+      </li>
+    </ul>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, PropType, ref } from "vue";
 import BaseButton from "@/components/BaseButton.vue";
+import BaseInput from "@/components/BaseInput.vue";
+import BaseSelect from "@/components/BaseSelect.vue";
+
+export type TLevel = {
+  value: number;
+  title: string | number;
+};
 
 export default defineComponent({
   name: "Settings",
-  components: { BaseButton },
+  components: { BaseSelect, BaseInput, BaseButton },
   props: {
     isPlaying: {
       type: Boolean,
@@ -56,7 +63,7 @@ export default defineComponent({
       default: false,
     },
     levels: {
-      type: Number,
+      type: Array as PropType<TLevel[]>,
       required: true,
     },
   },
@@ -64,6 +71,7 @@ export default defineComponent({
   setup(props) {
     let speed = ref(20);
     let level = ref(-1);
+
     const startButtonTitle = computed(() =>
       props.isPaused ? "restart" : "start"
     );
@@ -92,25 +100,13 @@ export default defineComponent({
   background: rgba(1, 7, 41, 0.9);
 }
 
-.settings label {
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
-  font-size: 20px;
+.settings__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.settings input {
-  margin-bottom: 0;
-  margin-left: 8px;
-}
-
-.settings__button {
+.settings__item {
   margin-bottom: 12px;
-}
-
-.settings__level-select {
-  height: 30px;
-  margin-left: 12px;
-  font-size: 16px;
 }
 </style>

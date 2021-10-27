@@ -10,7 +10,7 @@ import { Obstruction } from "./game-objects/obstruction";
 import { KeyCode } from "./consts/key-code";
 import { Direction } from "./consts/direction";
 import { levels as baseLevels } from "../levels";
-import { Position } from "./types";
+import { Position, TLevel } from "./types";
 
 type TGameOptions = {
   boundaryPoint?: Position;
@@ -22,7 +22,6 @@ type TGameOptions = {
 
 interface IGame {
   scores: number;
-  levelsQty: number;
   start(): void;
   stop(): void;
   restart(options: TGameOptions): void;
@@ -32,6 +31,7 @@ interface IGame {
   onStop?(scores: number): void;
   onChangeScores?(scores: number): void;
   autoplay(): void;
+  getLevelsList(): TLevel[];
 }
 
 export class Game implements IGame {
@@ -53,7 +53,12 @@ export class Game implements IGame {
   private speed: number;
   private prizesCounter = 0;
   private isAutoplay = false;
+  private withUserLevel = false;
   private readonly levels: Position[][];
+  private static defaultLevel: TLevel = {
+    value: -1,
+    title: "free play",
+  };
 
   constructor(canvas: HTMLCanvasElement, options: TGameOptions = {}) {
     const {
@@ -61,7 +66,7 @@ export class Game implements IGame {
       objectSize,
       level = -1,
       speed = 20,
-      userLevel = [],
+      userLevel = null,
     } = options;
 
     this.ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
@@ -70,12 +75,13 @@ export class Game implements IGame {
     this.collisionChecker = new CollisionChecker();
     this.gameObjects = new GameObjectsFactory(boundaryPoint, objectSize);
     this.snake = this.gameObjects.getSnake();
-    this.levels = [...baseLevels, userLevel].filter((l) => l.length);
+    this.levels = [...baseLevels, userLevel || []].filter((l) => l.length);
     this.obstruction = this.gameObjects.getObstruction(
       this.levels[level] || []
     );
     this.prize = this.gameObjects.getNormalPrize(this.unavailablePositions);
     this.speed = speed;
+    this.withUserLevel = !!(userLevel && userLevel.length);
   }
 
   get scores(): number {
@@ -86,14 +92,6 @@ export class Game implements IGame {
     this._scores = val;
     if (typeof this.onChangeScores === "function")
       this.onChangeScores(this._scores);
-  }
-
-  get levelsQty(): number {
-    return this.levels.length;
-  }
-
-  private get unavailablePositions(): Position[] {
-    return [...this.snake.coordinates, ...this.obstruction.coordinates];
   }
 
   autoplay(): void {
@@ -126,6 +124,21 @@ export class Game implements IGame {
   resume = (): void => {
     this.animationHandler.resume();
   };
+
+  getLevelsList(): TLevel[] {
+    return [
+      Game.defaultLevel,
+      ...this.levels.map((_, i) =>
+        this.withUserLevel && i === this.levels.length - 1
+          ? { value: i, title: "user level" }
+          : { value: i, title: i + 1 }
+      ),
+    ];
+  }
+
+  private get unavailablePositions(): Position[] {
+    return [...this.snake.coordinates, ...this.obstruction.coordinates];
+  }
 
   private addListeners() {
     document.addEventListener("keydown", this.changeDirection);

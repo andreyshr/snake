@@ -22,25 +22,27 @@
 import { defineComponent, ref, Ref, onMounted } from "vue";
 import BaseButton from "@/components/BaseButton.vue";
 import { Editor } from "@/game";
-import { LocalStorageKey } from "@/consts/local-storage-key";
+import { useUserLevel } from "@/hooks/useUserLevel";
 
 export default defineComponent({
   name: "EditorPage",
   components: { BaseButton },
   setup() {
-    const canvas: Ref<HTMLCanvasElement | null> = ref(null);
     let editor: Editor | null = null;
+    const canvas: Ref<HTMLCanvasElement | null> = ref(null);
+    const { userLevel, setUserLevel } = useUserLevel();
 
     const save = (evt: Event, cb: (event: Event) => void): void => {
       if (editor) {
-        const level = editor.getLevel();
-        localStorage.setItem(LocalStorageKey.UserLevel, JSON.stringify(level));
+        setUserLevel(editor.getLevel());
       }
       cb && cb(evt);
     };
 
     onMounted(() => {
-      editor = new Editor(canvas.value as HTMLCanvasElement);
+      editor = new Editor(canvas.value as HTMLCanvasElement, {
+        userLevel: userLevel.value,
+      });
     });
 
     return {

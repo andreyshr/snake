@@ -7,6 +7,7 @@ import { Position } from "./types";
 type TEditorOptions = {
   boundaryPoint?: Position;
   objectSize?: number;
+  userLevel?: Position[];
 };
 
 interface IEditor {
@@ -23,16 +24,16 @@ export class Editor implements IEditor {
   private obstruction: Obstruction;
 
   constructor(canvas: HTMLCanvasElement, options: TEditorOptions = {}) {
-    const { boundaryPoint, objectSize } = options;
+    const { boundaryPoint, objectSize, userLevel = [] } = options;
 
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
     this.canvasToBlob = new CanvasToBlob(canvas);
     this.renderer = new Renderer(this.ctx, boundaryPoint);
     this.gameObjects = new GameObjectsFactory(boundaryPoint, objectSize);
-    this.obstruction = this.gameObjects.getObstruction([]);
+    this.obstruction = this.gameObjects.getObstruction(userLevel);
 
-    this.addListeners();
+    this.init();
   }
 
   getScreenshot(): Blob {
@@ -41,6 +42,11 @@ export class Editor implements IEditor {
 
   getLevel(): Position[] {
     return this.obstruction.coordinates;
+  }
+
+  private init(): void {
+    this.addListeners();
+    this.render();
   }
 
   private addListeners(): void {

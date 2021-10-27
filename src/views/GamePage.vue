@@ -12,7 +12,7 @@
 
       <settings
         v-if="!isPlaying || isPaused"
-        :levels="levelsQty"
+        :levels="levels"
         :is-playing="isPlaying"
         :is-paused="isPaused"
         @started="start"
@@ -28,20 +28,22 @@
 import { defineComponent, ref, Ref, onMounted, onUnmounted } from "vue";
 import TouchControl from "@/components/TouchControl.vue";
 import StatusBar from "@/components/StatusBar.vue";
-import Settings from "@/components/Settings.vue";
+import Settings, { TLevel } from "@/components/Settings.vue";
 import { Game } from "@/game";
-import { LocalStorageKey } from "@/consts/local-storage-key";
+import { useUserLevel } from "@/hooks/useUserLevel";
 
 export default defineComponent({
   name: "GamePage",
   components: { Settings, StatusBar, TouchControl },
   setup() {
-    const canvas: Ref<HTMLCanvasElement | null> = ref(null);
     let game: Game | null = null;
-    let scores = ref(0);
-    let levelsQty = ref(0);
-    let isPlaying = ref(false);
-    let isPaused = ref(false);
+
+    const canvas: Ref<HTMLCanvasElement | null> = ref(null);
+    const levels: Ref<TLevel[]> = ref([]);
+    const scores = ref(0);
+    const isPlaying = ref(false);
+    const isPaused = ref(false);
+    const { userLevel } = useUserLevel();
 
     const start = (speed: number, level: number) => {
       if (game)
@@ -65,22 +67,12 @@ export default defineComponent({
       }
     };
 
-    const getUserLevel = () => {
-      try {
-        return JSON.parse(
-          localStorage.getItem(LocalStorageKey.UserLevel) || "[]"
-        );
-      } catch {
-        return [];
-      }
-    };
-
     onMounted(() => {
       game = new Game(canvas.value as HTMLCanvasElement, {
-        userLevel: getUserLevel(),
+        userLevel: userLevel.value,
       });
 
-      levelsQty.value = game.levelsQty;
+      levels.value = game.getLevelsList();
 
       game.onChangeScores = (_scores) => {
         scores.value = _scores;
@@ -104,7 +96,7 @@ export default defineComponent({
       canvas,
       game,
       scores,
-      levelsQty,
+      levels,
       isPlaying,
       isPaused,
       start,
