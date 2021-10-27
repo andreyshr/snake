@@ -1,7 +1,7 @@
 <template>
   <label class="base-select">
     {{ label }}
-    <select :value="modelValue" v-bind="$attrs" @input="updateSelect">
+    <select :value="modelValue" v-bind="$attrs" @change="updateSelect">
       <option
         v-for="option in options"
         :key="option.value"
