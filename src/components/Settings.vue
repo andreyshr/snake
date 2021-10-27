@@ -44,11 +44,7 @@ import { computed, defineComponent, PropType, ref } from "vue";
 import BaseButton from "@/components/BaseButton.vue";
 import BaseInput from "@/components/BaseInput.vue";
 import BaseSelect from "@/components/BaseSelect.vue";
-
-export type TLevel = {
-  value: number;
-  title: string | number;
-};
+import { TLevel } from "@/game";
 
 export default defineComponent({
   name: "Settings",

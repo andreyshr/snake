@@ -28,8 +28,8 @@
 import { defineComponent, ref, Ref, onMounted, onUnmounted } from "vue";
 import TouchControl from "@/components/TouchControl.vue";
 import StatusBar from "@/components/StatusBar.vue";
-import Settings, { TLevel } from "@/components/Settings.vue";
-import { Game } from "@/game";
+import Settings from "@/components/Settings.vue";
+import { Game, TLevel } from "@/game";
 import { useUserLevel } from "@/hooks/useUserLevel";
 
 export default defineComponent({
