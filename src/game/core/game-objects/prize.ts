@@ -1,18 +1,18 @@
 import { GameObject } from "./game-object";
 import { Shape } from "../consts/shape";
 import { Scores } from "@/game/core/consts/scores";
-import { Position } from "../types";
+import { TPosition } from "../types";
 
 export abstract class Prize extends GameObject {
-  private unavailablePositions: Position[];
+  private unavailablePositions: TPosition[];
   public readonly scores: number;
 
   protected constructor(
     shape: Shape,
     size: number,
     color: string,
-    boundaryPoint: Position,
-    unavailablePositions: Position[],
+    boundaryPoint: TPosition,
+    unavailablePositions: TPosition[],
     scores: Scores = 0
   ) {
     super(shape, size, color, boundaryPoint);
@@ -31,7 +31,7 @@ export abstract class Prize extends GameObject {
     let isUnavailablePosition = false;
     const [boundaryX, boundaryY] = this.boundaryPoint;
     do {
-      const position: Position = [
+      const position: TPosition = [
         Prize.randStep(0, boundaryX, this.size),
         Prize.randStep(0, boundaryY, this.size),
       ];

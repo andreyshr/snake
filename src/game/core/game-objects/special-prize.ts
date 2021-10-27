@@ -1,12 +1,12 @@
 import { Prize } from "./prize";
 import { Shape } from "../consts/shape";
 import { Scores } from "@/game/core/consts/scores";
-import { Position } from "../types";
+import { TPosition } from "../types";
 
 export type TSpecialPrizeOptions = {
-  boundaryPoint: Position;
+  boundaryPoint: TPosition;
   size: number;
-  unavailablePositions: Position[];
+  unavailablePositions: TPosition[];
   color: string;
 };
 

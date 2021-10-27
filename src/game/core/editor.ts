@@ -2,17 +2,17 @@ import { Renderer } from "./modules/renderer";
 import { CanvasToBlob } from "@/game/core/modules/canvas-to-blob";
 import { GameObjectsFactory } from "./game-objects/game-objects-factory";
 import { Obstruction } from "./game-objects/obstruction";
-import { Position } from "./types";
+import { TPosition } from "./types";
 
 type TEditorOptions = {
-  boundaryPoint?: Position;
+  boundaryPoint?: TPosition;
   objectSize?: number;
-  userLevel?: Position[];
+  userLevel?: TPosition[];
 };
 
 interface IEditor {
   getScreenshot(): Blob;
-  getLevel(): Position[];
+  getLevel(): TPosition[];
 }
 
 export class Editor implements IEditor {
@@ -40,7 +40,7 @@ export class Editor implements IEditor {
     return this.canvasToBlob.getFile();
   }
 
-  getLevel(): Position[] {
+  getLevel(): TPosition[] {
     return this.obstruction.coordinates;
   }
 
@@ -54,7 +54,7 @@ export class Editor implements IEditor {
       const [x, y] = this.getCursorPosition(evt);
       const dX = 20 - (x % 20);
       const dY = 20 - (y % 20);
-      const position: Position = [x - (20 - dX), y - (20 - dY)];
+      const position: TPosition = [x - (20 - dX), y - (20 - dY)];
       const positionIndex = this.obstruction.coordinates.findIndex(
         ([x, y]) => x === position[0] && y === position[1]
       );
@@ -66,7 +66,7 @@ export class Editor implements IEditor {
     });
   }
 
-  private getCursorPosition(event: MouseEvent): Position {
+  private getCursorPosition(event: MouseEvent): TPosition {
     const rect = this.canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;

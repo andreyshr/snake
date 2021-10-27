@@ -1,18 +1,18 @@
 import { GameObject } from "./game-object";
 import { Direction } from "../consts/direction";
 import { Shape } from "../consts/shape";
-import { Position } from "../types";
+import { TPosition } from "../types";
 
 export type TSnakeOptions = {
   initialLength: number;
   size: number;
-  boundaryPoint: Position;
+  boundaryPoint: TPosition;
   color: string;
 };
 
 export class Snake extends GameObject {
   private readonly initialLength: number;
-  private readonly startPosition: Position = [560, 20];
+  private readonly startPosition: TPosition = [560, 20];
 
   constructor({ initialLength, size, boundaryPoint, color }: TSnakeOptions) {
     super(Shape.Square, size, color, boundaryPoint);
@@ -22,13 +22,13 @@ export class Snake extends GameObject {
     this.create();
   }
 
-  get head(): Position {
+  get head(): TPosition {
     return this.coordinates[this.coordinates.length - 1];
   }
 
-  get body(): Position[] {
+  get body(): TPosition[] {
     return this.coordinates.filter(
-      (position: Position, i: number) => i !== this.coordinates.length - 1
+      (position: TPosition, i: number) => i !== this.coordinates.length - 1
     );
   }
 
@@ -41,7 +41,7 @@ export class Snake extends GameObject {
 
   move(direction: string): void {
     this.extractTail();
-    const head: Position = [0, 0];
+    const head: TPosition = [0, 0];
     const [boundaryX, boundaryY] = this.boundaryPoint;
 
     if (direction === Direction.Down) {
@@ -73,15 +73,15 @@ export class Snake extends GameObject {
   }
 
   private insertTail(): void {
-    const tail: Position = [NaN, NaN];
+    const tail: TPosition = [NaN, NaN];
     this.coordinates.unshift(tail);
   }
 
-  private extractTail(): Position | undefined {
+  private extractTail(): TPosition | undefined {
     return this.coordinates.shift();
   }
 
-  private insertHead(head: Position) {
+  private insertHead(head: TPosition) {
     this.coordinates.push(head);
   }
 

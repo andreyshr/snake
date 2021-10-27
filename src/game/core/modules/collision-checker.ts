@@ -1,17 +1,17 @@
-import { Position } from "../types";
+import { TPosition } from "../types";
 
 interface ICollisionChecker {
   checkCollision(
-    positions: Position[],
-    position: Position,
+    positions: TPosition[],
+    position: TPosition,
     cb: () => void
   ): void;
 }
 
 export class CollisionChecker implements ICollisionChecker {
   checkCollision(
-    positions: Position[] = [],
-    position: Position,
+    positions: TPosition[] = [],
+    position: TPosition,
     cb: () => void
   ): this {
     let isCollision = false;

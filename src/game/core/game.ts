@@ -10,14 +10,14 @@ import { Obstruction } from "./game-objects/obstruction";
 import { KeyCode } from "./consts/key-code";
 import { Direction } from "./consts/direction";
 import { levels as baseLevels } from "../levels";
-import { Position, TLevel } from "./types";
+import { TPosition, TLevel } from "./types";
 
 type TGameOptions = {
-  boundaryPoint?: Position;
+  boundaryPoint?: TPosition;
   objectSize?: number;
   speed?: number;
   level?: number;
-  userLevel?: Position[];
+  userLevel?: TPosition[];
 };
 
 interface IGame {
@@ -54,7 +54,7 @@ export class Game implements IGame {
   private prizesCounter = 0;
   private isAutoplay = false;
   private withUserLevel = false;
-  private readonly levels: Position[][];
+  private readonly levels: TPosition[][];
   private static defaultLevel: TLevel = {
     value: -1,
     title: "free play",
@@ -136,7 +136,7 @@ export class Game implements IGame {
     ];
   }
 
-  private get unavailablePositions(): Position[] {
+  private get unavailablePositions(): TPosition[] {
     return [...this.snake.coordinates, ...this.obstruction.coordinates];
   }
 

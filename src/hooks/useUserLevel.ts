@@ -1,9 +1,9 @@
 import { Ref, ref } from "vue";
-import { Position } from "@/game";
+import { TPosition } from "@/game";
 
 type TReturnUseUserLevel = {
-  userLevel: Ref<Position[]>;
-  setUserLevel(level: Position[]): void;
+  userLevel: Ref<TPosition[]>;
+  setUserLevel(level: TPosition[]): void;
 };
 
 const userLevelKey = "snake_user_level";
@@ -19,7 +19,7 @@ export const useUserLevel = (): TReturnUseUserLevel => {
     }
   };
 
-  const setUserLevel = (level: Position[]) => {
+  const setUserLevel = (level: TPosition[]) => {
     localStorage.setItem(userLevelKey, JSON.stringify(level));
   };
 

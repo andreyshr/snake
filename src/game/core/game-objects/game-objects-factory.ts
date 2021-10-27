@@ -4,21 +4,24 @@ import { Snake } from "./snake";
 import { Obstruction } from "./obstruction";
 import { Geometry } from "../consts/geometry";
 import { Color } from "../consts/color";
-import { Position } from "../types";
+import { TPosition } from "../types";
 
 interface IGameObjectsFactory {
-  getNormalPrize(unavailablePositions: Position[], color?: string): NormalPrize;
+  getNormalPrize(
+    unavailablePositions: TPosition[],
+    color?: string
+  ): NormalPrize;
   getSpecialPrize(
-    unavailablePositions: Position[],
+    unavailablePositions: TPosition[],
     color?: string
   ): SpecialPrize;
   getSnake(length?: number, color?: string): Snake;
-  getObstruction(coordinates: Position[], color?: string): Obstruction;
+  getObstruction(coordinates: TPosition[], color?: string): Obstruction;
 }
 
 export class GameObjectsFactory implements IGameObjectsFactory {
   constructor(
-    private boundaryPoint: Position = [
+    private boundaryPoint: TPosition = [
       Geometry.BoundaryPointX,
       Geometry.BoundaryPointY,
     ],
@@ -26,7 +29,7 @@ export class GameObjectsFactory implements IGameObjectsFactory {
   ) {}
 
   getNormalPrize(
-    unavailablePositions: Position[],
+    unavailablePositions: TPosition[],
     color?: string
   ): NormalPrize {
     return new NormalPrize({
@@ -38,7 +41,7 @@ export class GameObjectsFactory implements IGameObjectsFactory {
   }
 
   getSpecialPrize(
-    unavailablePositions: Position[],
+    unavailablePositions: TPosition[],
     color?: string
   ): SpecialPrize {
     return new SpecialPrize({
@@ -58,7 +61,7 @@ export class GameObjectsFactory implements IGameObjectsFactory {
     });
   }
 
-  getObstruction(coordinates: Position[], color?: string): Obstruction {
+  getObstruction(coordinates: TPosition[], color?: string): Obstruction {
     return new Obstruction({
       coordinates,
       boundaryPoint: this.boundaryPoint,

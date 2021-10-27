@@ -2,20 +2,23 @@ import { GameObject } from "../game-objects/game-object";
 import { Shape } from "../consts/shape";
 import { Geometry } from "../consts/geometry";
 import { Color } from "../consts/color";
-import { Position } from "../types";
+import { TPosition } from "../types";
 
 interface IRenderer {
   render(obj: GameObject): Renderer;
-  clear(boundaryPoint: Position, color: string): void;
+  clear(boundaryPoint: TPosition, color: string): void;
 }
 
 export class Renderer implements IRenderer {
   private ctx: CanvasRenderingContext2D;
-  private readonly boundaryPoint: Position;
+  private readonly boundaryPoint: TPosition;
 
   constructor(
     ctx: CanvasRenderingContext2D,
-    boundaryPoint: Position = [Geometry.BoundaryPointX, Geometry.BoundaryPointY]
+    boundaryPoint: TPosition = [
+      Geometry.BoundaryPointX,
+      Geometry.BoundaryPointY,
+    ]
   ) {
     this.ctx = ctx;
     this.boundaryPoint = boundaryPoint;
@@ -37,20 +40,20 @@ export class Renderer implements IRenderer {
     return this;
   }
 
-  clear(boundaryPoint?: Position, color?: string): void {
+  clear(boundaryPoint?: TPosition, color?: string): void {
     const [boundaryX, boundaryY] = boundaryPoint || this.boundaryPoint;
     this.ctx.fillStyle = color || Color.Background;
     this.ctx.fillRect(0, 0, boundaryX, boundaryY);
   }
 
-  private drawSquare(positions: Position[], size: number) {
+  private drawSquare(positions: TPosition[], size: number) {
     for (let i = 0; i < positions.length; i++) {
       const [x, y] = positions[i];
       this.ctx.fillRect(x, y, size, size);
     }
   }
 
-  private drawArc(positions: Position[], size: number) {
+  private drawArc(positions: TPosition[], size: number) {
     for (let i = 0; i < positions.length; i++) {
       const [x, y] = positions[i];
       this.ctx.beginPath();

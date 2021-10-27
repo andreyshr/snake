@@ -1,18 +1,18 @@
 import { Shape } from "../consts/shape";
-import { Position } from "../types";
+import { TPosition } from "../types";
 
 export abstract class GameObject {
   public shape: Shape;
-  public coordinates: Position[] = [];
+  public coordinates: TPosition[] = [];
   public color: string;
   public size: number;
-  protected boundaryPoint: Position;
+  protected boundaryPoint: TPosition;
 
   protected constructor(
     shape: Shape,
     size: number,
     color: string,
-    boundaryPoint: Position
+    boundaryPoint: TPosition
   ) {
     this.shape = shape;
     this.size = size;
@@ -20,5 +20,5 @@ export abstract class GameObject {
     this.boundaryPoint = boundaryPoint;
   }
 
-  protected abstract create(coordinates?: Position[]): void;
+  protected abstract create(coordinates?: TPosition[]): void;
 }

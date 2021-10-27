@@ -1,12 +1,12 @@
 import { GameObject } from "./game-object";
 import { Shape } from "../consts/shape";
-import { Position } from "../types";
+import { TPosition } from "../types";
 
 export type TObstructionOptions = {
   size: number;
-  coordinates: Position[];
+  coordinates: TPosition[];
   color: string;
-  boundaryPoint: Position;
+  boundaryPoint: TPosition;
 };
 
 export class Obstruction extends GameObject {
@@ -21,7 +21,7 @@ export class Obstruction extends GameObject {
     this.create(coordinates);
   }
 
-  protected create(coordinates: Position[]): void {
+  protected create(coordinates: TPosition[]): void {
     this.coordinates = coordinates;
   }
 }
