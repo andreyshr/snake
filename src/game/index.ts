@@ -1,4 +1,5 @@
 import { Game } from "./core/game";
 import { Editor } from "./core/editor";
+import { Position, TLevel } from "./core/types";
 
-export { Game, Editor };
+export { Game, Editor, Position, TLevel };
