@@ -1,10 +1,9 @@
 import { mount, VueWrapper } from "@vue/test-utils";
-import { ComponentPublicInstance } from "vue";
 import router from "@/router";
 import Settings from "@/components/Settings.vue";
 
 describe("Settings", () => {
-  let wrapper: VueWrapper<ComponentPublicInstance>;
+  let wrapper: VueWrapper<any>;
 
   beforeEach(async () => {
     await router.push("/");
@@ -36,14 +35,6 @@ describe("Settings", () => {
     await wrapper.setProps({ isPaused: true });
 
     expect(wrapper.find(".start").text()).toBe("restart");
-  });
-
-  it("should properly render levels", async () => {
-    expect(wrapper.findAll("select option")).toHaveLength(1);
-
-    await wrapper.setProps({ levels: 3 });
-
-    expect(wrapper.findAll("select option")).toHaveLength(4);
   });
 
   it("should emit an event when resume button clicked", async () => {
