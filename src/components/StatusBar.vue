@@ -1,9 +1,6 @@
 <template>
   <div class="status-bar">
-    <div class="status-bar__scores">
-      <span>scores: </span>
-      <span>{{ scores }}</span>
-    </div>
+    <scores :scores="scores" />
     <base-button
       @click="$emit('paused')"
       :disabled="!isPlaying || isPaused"
@@ -18,10 +15,11 @@
 import { defineComponent } from "vue";
 import BaseButton from "@/components/BaseButton";
 import BaseIcon from "@/components/BaseIcon";
+import Scores from "@/components/Scores";
 
 export default defineComponent({
   name: "StatusBar",
-  components: { BaseIcon, BaseButton },
+  components: { Scores, BaseIcon, BaseButton },
   props: {
     isPlaying: {
       type: Boolean,
