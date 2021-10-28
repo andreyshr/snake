@@ -5,9 +5,7 @@ describe("TouchControl", () => {
   it("should properly render button up", () => {
     const wrapper = mount(TouchControl);
 
-    const buttonUp = wrapper.find("button#ArrowUp");
-
-    expect(buttonUp.exists()).toBe(true);
+    expect(wrapper.find("button#ArrowUp").exists()).toBe(true);
   });
 
   it("should properly render button down", () => {
