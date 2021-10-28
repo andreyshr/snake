@@ -14,9 +14,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const getIcon = () => import(`@/assets/icons/${props.icon}.svg`);
-
-    const Icon = computed(() => defineAsyncComponent(getIcon));
+    const Icon = computed(() =>
+      defineAsyncComponent(() => import(`@/assets/icons/${props.icon}.svg`))
+    );
 
     return {
       Icon,
