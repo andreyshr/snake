@@ -21,6 +21,8 @@ export default defineComponent({
 
 @font-face {
   font-family: "Pixel";
+  font-weight: normal;
+  font-style: normal;
   src: url(assets/fonts/Pixel.woff2);
   font-display: swap;
 }
@@ -31,7 +33,7 @@ body {
 }
 
 * {
-  font-family: Pixel, Arial, sans-serif;
+  font-family: Pixel, Tahoma, sans-serif;
 }
 
 *,
