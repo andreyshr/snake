@@ -11,7 +11,7 @@ describe("Settings", () => {
       props: {
         isPlaying: false,
         isPaused: false,
-        levels: 0,
+        levels: [],
       },
       global: {
         plugins: [router],
