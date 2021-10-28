@@ -30,7 +30,7 @@ import TouchControl from "@/components/TouchControl.vue";
 import StatusBar from "@/components/StatusBar.vue";
 import Settings from "@/components/Settings.vue";
 import { Game, TLevel } from "@/game";
-import { useUserLevel } from "@/hooks/useUserLevel";
+import { useUserLevel } from "@/hooks/use-user-level";
 
 export default defineComponent({
   name: "GamePage",

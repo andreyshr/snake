@@ -6,7 +6,7 @@ type TReturnUseUserLevel = {
   setUserLevel(level: TPosition[]): void;
 };
 
-const userLevelKey = "snake_user_level";
+export const userLevelKey = "snake_user_level";
 
 export const useUserLevel = (): TReturnUseUserLevel => {
   const userLevel = ref();
@@ -21,6 +21,7 @@ export const useUserLevel = (): TReturnUseUserLevel => {
 
   const setUserLevel = (level: TPosition[]) => {
     localStorage.setItem(userLevelKey, JSON.stringify(level));
+    userLevel.value = getUserLevel();
   };
 
   userLevel.value = getUserLevel();

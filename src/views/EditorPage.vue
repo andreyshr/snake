@@ -22,7 +22,7 @@
 import { defineComponent, ref, Ref, onMounted } from "vue";
 import BaseButton from "@/components/BaseButton.vue";
 import { Editor } from "@/game";
-import { useUserLevel } from "@/hooks/useUserLevel";
+import { useUserLevel } from "@/hooks/use-user-level";
 
 export default defineComponent({
   name: "EditorPage",
@@ -64,6 +64,7 @@ export default defineComponent({
 
   @media (min-width: 768px) {
     width: 600px;
+    padding-top: 110px;
   }
 }
 
