@@ -64,7 +64,6 @@ export default defineComponent({
 
   @media (min-width: 768px) {
     width: 600px;
-    padding-top: 110px;
   }
 }
 
