@@ -5,15 +5,13 @@
     </div>
 
     <div class="editor-page__control">
-      <router-link to="/game" custom v-slot="{ navigate, href }">
-        <base-button
-          @click="save($event, navigate)"
-          @keypress.enter="save($event, navigate)"
-          tag="a"
-          :href="href"
-          >save and play</base-button
-        >
-      </router-link>
+      <base-button
+        @click.prevent="saveLevelAndRedirect"
+        @keypress.enter.prevent="saveLevelAndRedirect"
+        tag="a"
+        href="/game"
+        >save and play</base-button
+      >
     </div>
   </div>
 </template>
@@ -23,6 +21,7 @@ import { defineComponent, ref, Ref, onMounted } from "vue";
 import BaseButton from "@/components/BaseButton.vue";
 import { Editor } from "@/game";
 import { useUserLevel } from "@/hooks/use-user-level";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "EditorPage",
@@ -30,13 +29,14 @@ export default defineComponent({
   setup() {
     let editor: Editor | null = null;
     const canvas: Ref<HTMLCanvasElement | null> = ref(null);
+    const router = useRouter();
     const { userLevel, setUserLevel } = useUserLevel();
 
-    const save = (evt: Event, cb: (event: Event) => void): void => {
+    const saveLevelAndRedirect = (): void => {
       if (editor) {
         setUserLevel(editor.getLevel());
       }
-      cb && cb(evt);
+      router.push("/game");
     };
 
     onMounted(() => {
@@ -47,7 +47,7 @@ export default defineComponent({
 
     return {
       canvas,
-      save,
+      saveLevelAndRedirect,
     };
   },
 });
