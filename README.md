@@ -3,13 +3,14 @@
 
 ![Snake](https://i.ibb.co/6shts2n/gallery.png)
 
-Классическая змейка. Игра доступна по **[ссылке](https://dazzling-shockley-bb41ed.netlify.app/)**
+Classic Snake. The game is available at the  **[link](https://dazzling-shockley-bb41ed.netlify.app/)**
 
-Особенности:
+Features:
 
-- выбор скорости игры
-- выбор предустановленного уровня
-- создание своего уровня в редакторе
+- Support on mobile and desktop devices
+- Choice of game speed
+- Selection of predefined levels
+- Creation of custom levels in the editor
 
 ## Project setup
 ```
