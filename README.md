@@ -1,16 +1,19 @@
-# snake
 [![Netlify Status](https://api.netlify.com/api/v1/badges/0520eaca-39f4-4344-975d-3d454b7782e2/deploy-status)](https://app.netlify.com/sites/dazzling-shockley-bb41ed/deploys)
 
-![Snake](https://i.ibb.co/6shts2n/gallery.png)
+# 🐍 Classic Snake  
 
-Classic Snake. The game is available at the  **[link](https://dazzling-shockley-bb41ed.netlify.app/)**
+A simple and fun Snake game! Play it **[here](https://dazzling-shockley-bb41ed.netlify.app/)**.  
 
-Features:
+## 🚀 Features  
 
-- Support on mobile and desktop devices
-- Choice of game speed
-- Selection of predefined levels
-- Creation of custom levels in the editor
+- 📱 **Cross-platform** – Play on both mobile and desktop  
+- ⏩ **Adjustable speed** – Choose your preferred game pace  
+- 🏆 **Predefined levels** – Select from various built-in challenges  
+- 🎨 **Custom level editor** – Create and play your own levels  
+
+Enjoy the game and challenge yourself! 🕹️
+
+![Snake](https://i.ibb.co/pvYgPZCX/2025-03-12-14-43-21.gif)
 
 ## Project setup
 ```
